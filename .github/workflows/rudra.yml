@@ -9,8 +9,8 @@ on:
         type: string 
 
 env:
-  # BUCKET: sachin-bkt-test
-  # TFSTATE_FILE: terraform.tfstate
+  BUCKET: rudra-bkt-test
+  TFSTATE_FILE: terraform.tfstate
   aws_region: ${{ github.event.inputs.region }}
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
       - name: terraform init
         run: |
           cd module
-          terraform init
+          terraform init -reconfigure -backend-config="bucket=${{ env.BUCKET}}" -backend-config="key=${{ env.TFSTATE_FILE }}" -backend-config="region=${{ env.aws_region }}"
       - name: terraform plan
         run: |
           cd module
