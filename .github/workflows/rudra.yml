@@ -32,7 +32,7 @@ jobs:
       - name: terraform init
         run: |
           cd module
-          terraform init -reconfigure -backend-config="bucket=${{ env.BUCKET}}" -backend-config="key=${{ env.TFSTATE_FILE }}" -backend-config="region=${{ env.aws_region }}"
+          terraform init
       - name: terraform plan
         run: |
           cd module
